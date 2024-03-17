@@ -1,0 +1,55 @@
+"Games"
+{
+    "left4dead2"
+    {
+        "Offsets"
+        {
+            "CBaseEntity::GetRefEHandle"
+            {
+                "windows"   "2"
+                "linux"     "3"
+            }
+        }
+
+        "Addresses"
+        {
+            // E8 opcode is skipped
+            "ForEachTerrorPlayer<HighestFlowDistance> relative call"
+            {
+                "signature"	"CDirectorVersusMode::UpdateVersusBossSpawning"
+
+                "windows"
+                {
+                    "offset" "278"
+                }
+
+                // We could just grab the symbol, but then we would have to write platform-specific code
+                "linux"
+                {
+                    "offset" "324"
+                }
+            }
+        }
+
+        "Signatures"
+        {
+            "CDirectorVersusMode::UpdateVersusBossSpawning"
+            {
+                "library"   "server"
+                "windows"   "\x55\x8B\xEC\x83\xEC\x44\x57\x8B\xF9\x8B\x0D\x2A\x2A\x2A\x2A"
+                // 55 8B EC 83 EC 44 57 8B F9 8B 0D ? ? ? ?
+
+                "linux"     "@_ZN19CDirectorVersusMode24UpdateVersusBossSpawningEv"
+            }
+
+            "CEscapeRoute::GetPositionOnPath"
+            {
+                "library"   "server"
+                "windows"   "\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF0\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x0F\x57\xC9\xF3\x0F\x10\x43\x08"
+                // 53 8B DC 83 EC 08 83 E4 F0 83 C4 04 55 8B 6B 04 89 6C 24 04 8B EC 0F 57 C9 F3 0F 10 43 08
+
+                "linux"     "@_ZNK12CEscapeRoute17GetPositionOnPathEfP6Vector"
+            }
+        }
+    }
+}

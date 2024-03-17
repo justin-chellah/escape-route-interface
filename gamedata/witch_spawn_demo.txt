@@ -1,0 +1,79 @@
+"Games"
+{
+    "left4dead2"
+    {
+        "Addresses"
+        {
+            "ZombieManager instance"
+            {
+                "windows"
+                {
+                    "signature" "CDirectorVersusMode::UpdateVersusBossSpawning"
+                    "read" "682"
+                }
+
+                "linux"
+                {
+                    "signature" "TheZombieManager"
+                }
+
+                "read" "0"
+            }
+
+            // E8 opcode is skipped
+            "ZombieManager::SpawnWitch relative call"
+            {
+                "signature"	"CDirectorVersusMode::UpdateVersusBossSpawning"
+
+                "windows"
+                {
+                    "offset" "1332"
+                }
+
+                // We could just grab the symbol, but then we would have to write platform-specific code
+                "linux"
+                {
+                    "offset" "1057"
+                }
+            }
+
+            // E8 opcode is skipped
+            "SearchSurroundingAreas<RemoveWanderersScan> relative call"
+            {
+                "signature"	"CDirectorVersusMode::UpdateVersusBossSpawning"
+
+                "windows"
+                {
+                    "offset" "1367"
+                }
+
+                // We could just grab the symbol, but then we would have to write platform-specific code
+                "linux"
+                {
+                    "offset" "1116"
+                }
+            }
+        }
+
+        "Signatures"
+        {
+            "CDirectorVersusMode::UpdateVersusBossSpawning"
+            {
+                "library"   "server"
+                "windows"   "\x55\x8B\xEC\x83\xEC\x44\x57\x8B\xF9\x8B\x0D\x2A\x2A\x2A\x2A"
+                // 55 8B EC 83 EC 44 57 8B F9 8B 0D ? ? ? ?
+
+                "linux"     "@_ZN19CDirectorVersusMode24UpdateVersusBossSpawningEv"
+            }
+
+            "ZombieManager::IsSpaceForZombieHere"
+            {
+                "library"   "server"
+                "windows"   "\x55\x8B\xEC\x83\xEC\x58\xA1\x2A\x2A\x2A\x2A\x33\xC5\x89\x45\xFC\x8B\x0D\x2A\x2A\x2A\x2A"
+                // 55 8B EC 83 EC 58 A1 ? ? ? ? 33 C5 89 45 FC 8B 0D ? ? ? ?
+
+                "linux"     "@_ZNK13ZombieManager20IsSpaceForZombieHereERK6Vector"
+            }
+        }
+    }
+}
